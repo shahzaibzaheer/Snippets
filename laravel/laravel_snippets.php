@@ -11,7 +11,10 @@ public static function saveImage(UploadedFile $file){
         $extension = $file->getClientOriginalExtension();
 
         // generating unique file name
-        $uniqueFilename = $filename.time().'.'.$extension;
+        $uniqueFilename = $filename."-".time().'.'.$extension;
+
+        // remove all white spaces
+        $uniqueFilename = str_replace(' ', '', $uniqueFilename);
 
         $newFile = $file->move("folderName/",$uniqueFilename);
         return $newFile->getFilename();
